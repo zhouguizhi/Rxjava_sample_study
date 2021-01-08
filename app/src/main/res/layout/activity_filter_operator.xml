@@ -16,10 +16,22 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:onClick="debounceOperator"
                 android:text="debounce过滤操作符"
                 android:gravity="center"
+                android:background="@color/colorAccent"
+                android:layout_marginTop="10dp"
+                android:onClick="testDebounceOperator"
                 />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:text="distinct过滤操作符"
+                android:gravity="center"
+                android:background="@color/colorAccent"
+                android:layout_marginTop="10dp"
+                android:onClick="testDistinctOperator"
+                />
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

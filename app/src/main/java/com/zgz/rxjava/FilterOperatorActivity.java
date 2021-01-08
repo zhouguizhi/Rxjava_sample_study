@@ -4,12 +4,14 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.zgz.rxjava.util.LogUtil;
+import java.util.concurrent.TimeUnit;
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.functions.Predicate;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class FilterOperatorActivity extends AppCompatActivity {
     @Override
@@ -17,15 +19,6 @@ public class FilterOperatorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter_operator);
     }
-
-    /**
-     *
-     * @param view
-     */
-    public void debounceOperator(View view) {
-
-    }
-
     /**
      * distinct 过滤重复发射的数据
      * @param view
@@ -118,6 +111,61 @@ public class FilterOperatorActivity extends AppCompatActivity {
                     @Override
                     public void accept(Integer integer) throws Throwable {
                         LogUtil.e("take:onComplete:="+integer);
+                    }
+                });
+    }
+
+    public void testDebounceOperator(View view) {
+        Observable<String> source = Observable.create(emitter -> {
+            emitter.onNext("A");
+
+            Thread.sleep(1_500);
+            emitter.onNext("B");
+
+            Thread.sleep(500);
+            emitter.onNext("C");
+
+            Thread.sleep(250);
+            emitter.onNext("D");
+
+            Thread.sleep(2_000);
+            emitter.onNext("E");
+            emitter.onComplete();
+        });
+
+        source.subscribeOn(Schedulers.io())
+                .debounce(1, TimeUnit.SECONDS)
+                .blockingSubscribe(
+                        item -> System.out.println("onNext: " + item),
+                        Throwable::printStackTrace,
+                        () -> System.out.println("onComplete"));
+    }
+    /**
+     * distinct 过滤操作符 作用是过滤掉重复的数据源
+     * @param view
+     */
+    public void testDistinctOperator(View view) {
+        Observable.just(2, 3, 4, 4, 2, 1)
+                .distinct()
+                .subscribe(new Observer<Integer>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        LogUtil.e("onSubscribe:");
+                    }
+
+                    @Override
+                    public void onNext(@NonNull Integer integer) {
+                        LogUtil.e("onNext:>>>>>>"+integer);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        LogUtil.e("onError:");
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        LogUtil.e("onComplete:");
                     }
                 });
     }
