@@ -13,96 +13,95 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <TextView
-                android:id="@+id/activity_create_operator_tv_create_operator"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:text="create操作符"
                 android:gravity="center"
                 android:background="@color/colorAccent"
+                android:onClick="testCreateOperator"
                 />
             <TextView
-                android:id="@+id/activity_create_operator_tv_defer_operator"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:text="defer操作符"
                 android:gravity="center"
                 android:background="@color/colorAccent"
                 android:layout_marginTop="10dp"
+                android:onClick="testDeferOperator"
                 />
             <TextView
-                android:id="@+id/activity_create_operator_tv_empty_operator"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:text="empty操作符"
                 android:gravity="center"
                 android:background="@color/colorAccent"
                 android:layout_marginTop="10dp"
+                android:onClick="testEmptyOperator"
                 />
             <TextView
-                android:id="@+id/activity_create_operator_tv_error_operator"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:text="error操作符"
                 android:gravity="center"
                 android:background="@color/colorAccent"
                 android:layout_marginTop="10dp"
+                android:onClick="testErrorOperator"
                 />
             <TextView
-                android:id="@+id/activity_create_operator_tv_from_operator"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:text="from操作符"
                 android:gravity="center"
                 android:background="@color/colorAccent"
                 android:layout_marginTop="10dp"
+                android:onClick="testFromOperator"
                 />
             <TextView
-                android:id="@+id/activity_create_operator_tv_just_operator"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:text="just操作符"
                 android:gravity="center"
                 android:background="@color/colorAccent"
                 android:layout_marginTop="10dp"
+                android:onClick="testJustOperator"
                 />
             <TextView
-                android:id="@+id/activity_create_operator_tv_timer_operator"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:text="timer操作符"
                 android:gravity="center"
                 android:background="@color/colorAccent"
                 android:layout_marginTop="10dp"
+                android:onClick="testTimerOperator"
                 />
             <TextView
-                android:id="@+id/activity_create_operator_tv_range_operator"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:text="range操作符"
                 android:gravity="center"
                 android:background="@color/colorAccent"
                 android:layout_marginTop="10dp"
+                android:onClick="testRangeOperator"
                 />
             <TextView
-                android:id="@+id/activity_create_operator_tv_never_operator"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:text="never操作符"
                 android:gravity="center"
                 android:background="@color/colorAccent"
                 android:layout_marginTop="10dp"
+                android:onClick="testNeverOperator"
                 />
             <TextView
-                android:id="@+id/activity_create_operator_tv_interval_operator"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:text="interval操作符"
                 android:gravity="center"
                 android:background="@color/colorAccent"
                 android:layout_marginTop="10dp"
+                android:onClick="testIntervalOperator"
                 />
             <TextView
-                android:id="@+id/activity_create_operator_tv_generate_operator"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:text="generate操作符"
@@ -111,7 +110,6 @@
                 android:layout_marginTop="10dp"
                 />
             <TextView
-                android:id="@+id/activity_create_operator_tv_cut_subscribe"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:text="切断下游"
