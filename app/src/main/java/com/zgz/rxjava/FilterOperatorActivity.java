@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Observer;
+import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.functions.Predicate;
@@ -180,7 +181,6 @@ public class FilterOperatorActivity extends AppCompatActivity {
                     @Override
                     public void accept(Integer integer) throws Throwable {
                         LogUtil.e("accept:>>>>"+integer);
-                        
                     }
                 });
     }
@@ -196,6 +196,87 @@ public class FilterOperatorActivity extends AppCompatActivity {
                     @Override
                     public void accept(Integer integer) throws Throwable {
                         LogUtil.e("accept:>>>>"+integer);
+                    }
+                });
+    }
+
+    /**
+     * first 过滤操作符 只发射第一个数据
+     * @param view
+     */
+    public void testFirstOperator(View view) {
+//           Observable.just(1,2,3,4,5)
+//                   .first(3)
+//                   .subscribe(new Consumer<Integer>() {
+//                       @Override
+//                       public void accept(Integer integer) throws Throwable {
+//                           LogUtil.e("accept:>>>>"+integer);
+//                       }
+//                   });
+
+        Observable<Integer> source = Observable.just(1,2,3,4,5);
+        Single<Integer> firstOrDefault = source.first(2);
+        firstOrDefault.subscribe(new Consumer<Integer>() {
+            @Override
+            public void accept(Integer integer) throws Throwable {
+                LogUtil.e("accept:>>>>"+integer);
+            }
+        });
+    }
+
+    /**
+     * last 过滤操作符 只发射最后一个数据
+     * @param view
+     */
+    public void testLastOperator(View view) {
+                   Observable.just(1,2,3,4,5)
+                   .last(3)
+                   .subscribe(new Consumer<Integer>() {
+                       @Override
+                       public void accept(Integer integer) throws Throwable {
+                           LogUtil.e("accept:>>>>"+integer);
+                       }
+                   });
+    }
+    /**
+     * ofType 过滤掉不同的数据源, 比如只发送integer类型数据 那么float 等就不发送了
+     * @param view
+     */
+    public void testOfTypeOperator(View view) {
+        Observable
+                .just(1, 4.0, 3, 2.71, 2f, 7)
+                .ofType(Integer.class)
+                .subscribe(new Consumer<Number>() {
+            @Override
+            public void accept(Number number) throws Throwable {
+                LogUtil.e("accept:>>>>"+number);
+            }
+        });
+    }
+
+    /**
+     * skip 过滤下前面几个事件
+     * @param view
+     */
+    public void testSkipOperator(View view) {
+        Observable<Integer> source = Observable.just(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        source.skip(4)
+                .subscribe(new Observer<Integer>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        LogUtil.e("onSubscribe:>>>>");
+                    }
+                    @Override
+                    public void onNext(@NonNull Integer integer) {
+                        LogUtil.e("onNext:>>>>"+integer);
+                    }
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        LogUtil.e("onError:>>>>");
+                    }
+                    @Override
+                    public void onComplete() {
+                        LogUtil.e("onComplete:>>>>");
                     }
                 });
     }

@@ -34,12 +34,58 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
+                android:text="filter过滤操作符"
+                android:gravity="center"
+                android:background="@color/colorAccent"
+                android:layout_marginTop="10dp"
+                android:onClick="testFilterOperator"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
                 android:text="distinctUntilChanged过滤操作符"
                 android:gravity="center"
                 android:background="@color/colorAccent"
                 android:layout_marginTop="10dp"
                 android:onClick="testDistinctUntilChangedOperator"
                 />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:text="first过滤操作符"
+                android:gravity="center"
+                android:background="@color/colorAccent"
+                android:layout_marginTop="10dp"
+                android:onClick="testFirstOperator"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:text="last过滤操作符"
+                android:gravity="center"
+                android:background="@color/colorAccent"
+                android:layout_marginTop="10dp"
+                android:onClick="testLastOperator"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:text="ofType过滤操作符"
+                android:gravity="center"
+                android:background="@color/colorAccent"
+                android:layout_marginTop="10dp"
+                android:onClick="testOfTypeOperator"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:text="skip过滤操作符"
+                android:gravity="center"
+                android:background="@color/colorAccent"
+                android:layout_marginTop="10dp"
+                android:onClick="testSkipOperator"
+                />
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
