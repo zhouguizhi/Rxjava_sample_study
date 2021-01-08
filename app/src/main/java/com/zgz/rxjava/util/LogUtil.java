@@ -1,4 +1,4 @@
-package com.zgz.rxjava_sample_study.util;
+package com.zgz.rxjava.util;
 import android.util.Log;
 
 public class LogUtil {

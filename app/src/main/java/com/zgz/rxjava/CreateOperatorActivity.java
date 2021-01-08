@@ -1,13 +1,12 @@
-package com.zgz.rxjava_sample_study;
+package com.zgz.rxjava;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import com.zgz.rxjava_sample_study.util.LogUtil;
+import com.zgz.rxjava.util.LogUtil;
 import java.util.concurrent.TimeUnit;
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.core.ObservableEmitter;
 import io.reactivex.rxjava3.core.ObservableOnSubscribe;
 import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -341,29 +340,27 @@ public class CreateOperatorActivity extends AppCompatActivity {
 
     /**
      * 切断下游,让下游不再接受上游事件
-     * @param view
      */
     public void onCutSubscribeClickListener(View view) {
-        Observable.create(new ObservableOnSubscribe<Integer>() {
-            @Override
-            public void subscribe(@NonNull ObservableEmitter<Integer> emitter) throws Throwable {
-                for(int i=0;i<10;i++){
-                    emitter.onNext(i);
-                }
-                emitter.onComplete();
+        Observable.create((ObservableOnSubscribe<Integer>) emitter -> {
+            for(int i=0;i<10;i++){
+                emitter.onNext(i);
             }
+            emitter.onComplete();
         }).subscribe(new Observer<Integer>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
                 disposable = d;
                 LogUtil.e("onSubscribe......");
-                d.dispose();
             }
             @Override
             public void onNext(@NonNull Integer integer) {
                 LogUtil.e("onNext......"+integer);
+                //模拟只接受一个事件后终止
+                if( null!=disposable){
+                    disposable.dispose();
+                }
             }
-
             @Override
             public void onError(@NonNull Throwable e) {
                 LogUtil.e("onError......");
@@ -374,12 +371,11 @@ public class CreateOperatorActivity extends AppCompatActivity {
             }
         });
     }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
         //一般在activity销毁的时候使用该方法,比如一个耗时的任务,任务完成后再取更新ui,如果调用了dispose
-        //方法就不会取更新ui 
+        //方法就不会取更新ui
         if(null!=disposable){
             disposable.dispose();
         }
