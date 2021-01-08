@@ -1,9 +1,13 @@
-rxjava是基于观察者模式进行改造
+rxjava是基于观察者模式进行改造 github:https://github.com/ReactiveX/RxJava
+rxjava 文档https://github.com/ReactiveX/RxJava/wiki 学会rxjava的操作符
+
+
 按照面向对象思维，只有被观察者发生了改变, 然后通知观察者去做相应的变化
 
 observer 观察者
 observed 被观察者
 
+在调用了onErro或者onComplete方法之后,再发射事件 下游是不会接受到该事件的
 
 创建型操作符
 create
