@@ -28,7 +28,7 @@ public class CreateOperatorActivity extends AppCompatActivity {
      * interval Observable.interval(5000, TimeUnit.MILLISECONDS) 每隔几秒
      * 这个可以用在倒计时 比如登录获取验证码等场景
      */
-    public void testIntervalOperator(View view){
+    public void tesIintervalRangeOperator(){
         //这是倒计时功能
         Observable.intervalRange(1,5,1000,5000,TimeUnit.MILLISECONDS).subscribe(new Observer<Long>() {
             @Override
@@ -51,27 +51,33 @@ public class CreateOperatorActivity extends AppCompatActivity {
                 LogUtil.e("interval:onComplete");
             }
         });
-//        Observable.interval(1000,1000,TimeUnit.MILLISECONDS).subscribe(new Observer<Long>() {
-//            @Override
-//            public void onSubscribe(@NonNull Disposable d) {
-//                LogUtil.e("interval:onSubscribe");
-//            }
-//
-//            @Override
-//            public void onNext(@NonNull Long aLong) {
-//                LogUtil.e("interval:onNext:="+aLong);
-//            }
-//
-//            @Override
-//            public void onError(@NonNull Throwable e) {
-//                LogUtil.e("interval:onError");
-//            }
-//
-//            @Override
-//            public void onComplete() {
-//                LogUtil.e("interval:onComplete");
-//            }
-//        });
+    }
+    /**
+     * 返回一个每隔指定的时间间隔就发射一个序列号的 Observable 对象，可用来做倒计时等操作
+     * 使用场景 就是在获取验证码的时候 60s倒计时 在TextView显示的倒计时 ,这个默认是在0开始.
+     */
+    public void testIntervalOperator(View view){
+        Observable.interval(1000,1000,TimeUnit.MILLISECONDS).subscribe(new Observer<Long>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+                LogUtil.e("interval:onSubscribe");
+            }
+
+            @Override
+            public void onNext(@NonNull Long aLong) {
+                LogUtil.e("interval:onNext:="+aLong);
+
+            }
+            @Override
+            public void onError(@NonNull Throwable e) {
+                LogUtil.e("interval:onError");
+            }
+
+            @Override
+            public void onComplete() {
+                LogUtil.e("interval:onComplete");
+            }
+        });
 //        Observable.interval(1000, TimeUnit.MILLISECONDS).subscribe(new Observer<Long>() {
 //            @Override
 //            public void onSubscribe(@NonNull Disposable d) {
@@ -150,12 +156,11 @@ public class CreateOperatorActivity extends AppCompatActivity {
      * timer 是创建延迟发送的Observable
      */
     public void testTimerOperator(View view){
-        Observable.timer(1000,TimeUnit.MILLISECONDS).subscribe(new Observer<Long>() {
+        Observable.timer(5000,TimeUnit.MILLISECONDS).subscribe(new Observer<Long>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
                 LogUtil.e("timer:onSubscribe：");
             }
-
             @Override
             public void onNext(@NonNull Long aLong) {
                 LogUtil.e("timer:onNext："+aLong);
