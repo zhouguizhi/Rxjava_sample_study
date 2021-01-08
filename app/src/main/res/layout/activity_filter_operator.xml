@@ -31,7 +31,15 @@
                 android:layout_marginTop="10dp"
                 android:onClick="testDistinctOperator"
                 />
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:text="distinctUntilChanged过滤操作符"
+                android:gravity="center"
+                android:background="@color/colorAccent"
+                android:layout_marginTop="10dp"
+                android:onClick="testDistinctUntilChangedOperator"
+                />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

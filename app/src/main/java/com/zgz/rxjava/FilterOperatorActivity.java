@@ -169,4 +169,18 @@ public class FilterOperatorActivity extends AppCompatActivity {
                     }
                 });
     }
+    /**
+     * distinctUntilChanged 过滤操作符 过滤掉连续重复的数据源
+     * @param view
+     */
+    public void testDistinctUntilChangedOperator(View view) {
+        Observable.just(1, 2, 1, 2, 3, 4,3)
+                .distinctUntilChanged()
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Throwable {
+                        LogUtil.e("accept:>>>>"+integer);
+                    }
+                });
+    }
 }
