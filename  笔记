@@ -9,7 +9,7 @@ observed 被观察者
 
 在调用了onError或者onComplete方法之后,再发射事件 下游是不会接受到该事件的,如果已经发送了onComplete,再发送onError rxjava
 就会报错
-如果是先发送了onError事件 然后再发送onComplete,那么onComplete()方法将不会被打印,
+如果是先发送了onError事件 然后再发送onComplete,那么onComplete()方法将不会被打印,因为它会以为都发生了异常,就不会再打印了
 
 创建型操作符
 create

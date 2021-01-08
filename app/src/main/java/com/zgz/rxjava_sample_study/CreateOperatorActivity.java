@@ -1,11 +1,13 @@
 package com.zgz.rxjava_sample_study;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.zgz.rxjava_sample_study.util.LogUtil;
 import java.util.concurrent.TimeUnit;
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.ObservableEmitter;
 import io.reactivex.rxjava3.core.ObservableOnSubscribe;
 import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -22,6 +24,8 @@ public class CreateOperatorActivity extends AppCompatActivity {
     private TextView tvNeverOperator;
     private TextView tvIntervalOperator;
     private TextView tvGenerateOperator;
+    private Disposable disposable;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -298,7 +302,6 @@ public class CreateOperatorActivity extends AppCompatActivity {
             emitter.onNext("发送请求");
             emitter.onError(new Throwable("自定义异常"));
             emitter.onComplete();
-            emitter.onNext("再次发送请求");
         })//终点
                 .subscribe(new Observer<String>() {
                     @Override
@@ -334,5 +337,51 @@ public class CreateOperatorActivity extends AppCompatActivity {
         tvCreateOperator = findViewById(R.id.activity_create_operator_tv_create_operator);
         tvDeferOperator = findViewById(R.id.activity_create_operator_tv_defer_operator);
         tvEmptyOperator = findViewById(R.id.activity_create_operator_tv_empty_operator);
+    }
+
+    /**
+     * 切断下游,让下游不再接受上游事件
+     * @param view
+     */
+    public void onCutSubscribeClickListener(View view) {
+        Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<Integer> emitter) throws Throwable {
+                for(int i=0;i<10;i++){
+                    emitter.onNext(i);
+                }
+                emitter.onComplete();
+            }
+        }).subscribe(new Observer<Integer>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+                disposable = d;
+                LogUtil.e("onSubscribe......");
+                d.dispose();
+            }
+            @Override
+            public void onNext(@NonNull Integer integer) {
+                LogUtil.e("onNext......"+integer);
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                LogUtil.e("onError......");
+            }
+            @Override
+            public void onComplete() {
+                LogUtil.e("onComplete......");
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //一般在activity销毁的时候使用该方法,比如一个耗时的任务,任务完成后再取更新ui,如果调用了dispose
+        //方法就不会取更新ui 
+        if(null!=disposable){
+            disposable.dispose();
+        }
     }
 }

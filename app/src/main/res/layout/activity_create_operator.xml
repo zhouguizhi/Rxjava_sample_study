@@ -110,7 +110,16 @@
                 android:background="@color/colorAccent"
                 android:layout_marginTop="10dp"
                 />
-
+            <TextView
+                android:id="@+id/activity_create_operator_tv_cut_subscribe"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:text="切断下游"
+                android:gravity="center"
+                android:background="@color/colorAccent"
+                android:layout_marginTop="10dp"
+                android:onClick="onCutSubscribeClickListener"
+                />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
