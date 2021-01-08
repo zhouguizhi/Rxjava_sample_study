@@ -180,6 +180,22 @@ public class FilterOperatorActivity extends AppCompatActivity {
                     @Override
                     public void accept(Integer integer) throws Throwable {
                         LogUtil.e("accept:>>>>"+integer);
+                        
+                    }
+                });
+    }
+
+    /**
+     * filter 过滤操作符 filter可以使用表达式 过滤掉你想过滤掉的
+     * @param view
+     */
+    public void testFilterOperator(View view) {
+        Observable.just(1, 2, 1, 2, 3, 4,3)
+                .filter(x->x>2)
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Throwable {
+                        LogUtil.e("accept:>>>>"+integer);
                     }
                 });
     }
