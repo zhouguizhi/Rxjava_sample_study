@@ -121,6 +121,15 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
+                android:text="fromArray操作符"
+                android:gravity="center"
+                android:background="@color/colorAccent"
+                android:layout_marginTop="10dp"
+                android:onClick="testFromArrayOperator"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
                 android:text="切断下游"
                 android:gravity="center"
                 android:background="@color/colorAccent"

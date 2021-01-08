@@ -336,4 +336,29 @@ public class CreateOperatorActivity extends AppCompatActivity {
             disposable.dispose();
         }
     }
+    /**
+     * 发送多个
+     * @param view
+     */
+    public void testFromArrayOperator(View view) {
+        Integer[] array = new Integer[]{1,2,3,4,5,6};
+        Observable.fromArray(array).subscribe(new Observer<Integer>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+                LogUtil.e("onSubscribe:");
+            }
+            @Override
+            public void onNext(@NonNull Integer integer) {
+                LogUtil.e("onNext:>>>"+integer);
+            }
+            @Override
+            public void onError(@NonNull Throwable e) {
+                LogUtil.e("onError:");
+            }
+            @Override
+            public void onComplete() {
+                LogUtil.e("onComplete:");
+            }
+        });
+    }
 }
