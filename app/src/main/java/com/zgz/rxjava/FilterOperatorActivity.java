@@ -280,4 +280,31 @@ public class FilterOperatorActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    /**
+     * skipLast 从后面开始算过滤几个
+     * @param view
+     */
+    public void testSkipLastOperator(View view) {
+        Observable<Integer> source = Observable.just(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        source.skipLast(4)
+                .subscribe(new Observer<Integer>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        LogUtil.e("onSubscribe:>>>>");
+                    }
+                    @Override
+                    public void onNext(@NonNull Integer integer) {
+                        LogUtil.e("onNext:>>>>"+integer);
+                    }
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        LogUtil.e("onError:>>>>");
+                    }
+                    @Override
+                    public void onComplete() {
+                        LogUtil.e("onComplete:>>>>");
+                    }
+                });
+    }
 }
