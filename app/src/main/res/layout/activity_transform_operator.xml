@@ -5,12 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
    <TextView
-       android:id="@+id/tv_map"
        android:layout_width="match_parent"
        android:layout_height="40dp"
-       app:layout_constraintLeft_toLeftOf="parent"
-       app:layout_constraintTop_toTopOf="parent"
        android:text="map操作符"
        android:gravity="center"
        android:background="@color/colorAccent"
@@ -18,15 +22,41 @@
        android:onClick="onMapClickListener"
        />
     <TextView
-        android:id="@+id/tv_scan"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        app:layout_constraintLeft_toLeftOf="parent"
         android:text="scan操作符"
         android:gravity="center"
         android:background="@color/colorAccent"
         android:layout_marginTop="10dp"
         android:onClick="onScanClickListener"
-        app:layout_constraintTop_toBottomOf="@id/tv_map"
         />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="groupBy操作符"
+            android:gravity="center"
+            android:background="@color/colorAccent"
+            android:layout_marginTop="10dp"
+            android:onClick="onGroupByClickListener"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="flatMap操作符"
+            android:gravity="center"
+            android:background="@color/colorAccent"
+            android:layout_marginTop="10dp"
+            android:onClick="onFlatMapClickListener"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="concatMap操作符"
+            android:gravity="center"
+            android:background="@color/colorAccent"
+            android:layout_marginTop="10dp"
+            android:onClick="onConcatMapClickListener"
+            />
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

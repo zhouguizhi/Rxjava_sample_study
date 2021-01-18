@@ -4,11 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.core.Observer;
-import io.reactivex.rxjava3.disposables.Disposable;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override

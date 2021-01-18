@@ -4,13 +4,17 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.zgz.rxjava.util.LogUtil;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.ObservableOnSubscribe;
+import io.reactivex.rxjava3.core.ObservableSource;
 import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.functions.BiFunction;
 import io.reactivex.rxjava3.functions.Consumer;
-
+import io.reactivex.rxjava3.functions.Function;
 /**
  * @Description: 变换操作符
  * @Author: zhouguizhi
@@ -65,6 +69,74 @@ public class TransformOperatorActivity extends AppCompatActivity {
                     @Override
                     public void accept(Integer integer) {
 //                        LogUtil.e("accept:integer>>>>>"+integer);
+                    }
+                });
+    }
+    /**
+     * groupBy:是将
+     * @param view
+     */
+//    public void onGroupByClickListener(View view) {
+//        Observable<String> observable = Observable.just(
+//                "Tiger", "Elephant", "Cat", "Chameleon", "Frog", "Fish", "Turtle", "Flamingo");
+//        observable.groupBy(new Function<String, String>() {
+//            @Override
+//            public String apply(String s) throws Throwable {
+//                return s.toUpperCase();
+//            }
+//        })
+//        .subscribe(new Observer<GroupedObservable<String, String>>() {
+//            @Override
+//            public void onSubscribe(@NonNull Disposable d) {
+//
+//            }
+//
+//            @Override
+//            public void onNext(@NonNull GroupedObservable<String, String> stringStringGroupedObservable) {
+//                stringStringGroupedObservable.
+//            }
+//
+//            @Override
+//            public void onError(@NonNull Throwable e) {
+//
+//            }
+//            @Override
+//            public void onComplete() {
+//
+//            }
+//        });
+//    }
+    /**
+     * flatMap：被观察者-->变换操作符ObservableSource</String>  再次发送--->观察者
+     * 在这要分清楚map和flatMap  的区别
+     * flatMap是不排序的
+     */
+    public void onFlatMapClickListener(View view) {
+            Observable.just(1,2,3,4)
+                    .flatMap((Function<Integer, ObservableSource<String>>) integer -> Observable.create((ObservableOnSubscribe<String>) emitter -> emitter.onNext(String.valueOf(integer)))).subscribe(new Consumer<String>() {
+                @Override
+                public void accept(String s){
+                        LogUtil.e("accept:s>>>>>"+s);
+
+                }
+            });
+    }
+    /**
+     * concatMap:相比flatMap ,concatMap是排序的
+     */
+    public void onConcatMapClickListener(View view) {
+        Observable.just("周桂枝","周杰伦","周润发")
+                .concatMap((Function<String, ObservableSource<String>>) s -> {
+                    List<String>  list = new ArrayList<>();
+                    for(int i=0;i<3;i++){
+                        list.add(s+"i:>>>>>"+(i+1));
+                    }
+                    return Observable.fromIterable(list).delay(5,TimeUnit.SECONDS);
+                })
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s){
+                        LogUtil.e("accept:s>>>>>"+s);
                     }
                 });
     }
