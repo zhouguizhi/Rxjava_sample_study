@@ -57,6 +57,15 @@
             android:layout_marginTop="10dp"
             android:onClick="onConcatMapClickListener"
             />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="buffer操作符"
+            android:gravity="center"
+            android:background="@color/colorAccent"
+            android:layout_marginTop="10dp"
+            android:onClick="onBufferClickListener"
+            />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

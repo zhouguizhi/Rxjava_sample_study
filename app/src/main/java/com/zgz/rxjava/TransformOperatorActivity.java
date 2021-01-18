@@ -9,10 +9,12 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.ObservableEmitter;
 import io.reactivex.rxjava3.core.ObservableOnSubscribe;
 import io.reactivex.rxjava3.core.ObservableSource;
 import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.functions.Function;
 /**
  * @Description: 变换操作符
@@ -99,5 +101,42 @@ public class TransformOperatorActivity extends AppCompatActivity {
                     return Observable.fromIterable(list).delay(5,TimeUnit.SECONDS);
                 })
                 .subscribe(s -> LogUtil.e("accept:s>>>>>"+s));
+    }
+
+    /**
+     * buffer是缓存的意思,不要一次性全部发送,而是多少个一起发
+     * @param view
+     */
+    public void onBufferClickListener(View view) {
+        Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<Integer> emitter) throws Throwable {
+                for(int i=0;i<30;i++){
+                    emitter.onNext(i);
+                }
+            }
+        })
+                .buffer(5)
+                .subscribe(new Observer<List<Integer>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+                    @Override
+                    public void onNext(@NonNull List<Integer> integers) {
+                        LogUtil.e("---------------");
+                        for(Integer i:integers){
+                            LogUtil.e("i:="+i);
+                        }
+                    }
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 }
