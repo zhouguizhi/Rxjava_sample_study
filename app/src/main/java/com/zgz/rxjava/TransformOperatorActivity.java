@@ -13,7 +13,6 @@ import io.reactivex.rxjava3.core.ObservableOnSubscribe;
 import io.reactivex.rxjava3.core.ObservableSource;
 import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.functions.Function;
 /**
  * @Description: 变换操作符
@@ -65,47 +64,19 @@ public class TransformOperatorActivity extends AppCompatActivity {
                     //integer2 :表示传入第几个参数的值
                     return integer+integer2;
                 })
-                .subscribe(new Consumer<Integer>() {
-                    @Override
-                    public void accept(Integer integer) {
+                .subscribe(integer -> {
 //                        LogUtil.e("accept:integer>>>>>"+integer);
-                    }
                 });
     }
     /**
      * groupBy:是将
      * @param view
      */
-//    public void onGroupByClickListener(View view) {
-//        Observable<String> observable = Observable.just(
-//                "Tiger", "Elephant", "Cat", "Chameleon", "Frog", "Fish", "Turtle", "Flamingo");
-//        observable.groupBy(new Function<String, String>() {
-//            @Override
-//            public String apply(String s) throws Throwable {
-//                return s.toUpperCase();
-//            }
-//        })
-//        .subscribe(new Observer<GroupedObservable<String, String>>() {
-//            @Override
-//            public void onSubscribe(@NonNull Disposable d) {
-//
-//            }
-//
-//            @Override
-//            public void onNext(@NonNull GroupedObservable<String, String> stringStringGroupedObservable) {
-//                stringStringGroupedObservable.
-//            }
-//
-//            @Override
-//            public void onError(@NonNull Throwable e) {
-//
-//            }
-//            @Override
-//            public void onComplete() {
-//
-//            }
-//        });
-//    }
+    public void onGroupByClickListener(View view) {
+        Observable<Integer> observable = Observable.just(1,10,18,22,40,35,60);
+
+        observable.groupBy(integer -> integer>=18?"成年人":"未成年人").subscribe(stringIntegerGroupedObservable -> stringIntegerGroupedObservable.subscribe(integer -> LogUtil.e(stringIntegerGroupedObservable.getKey()+":::"+integer)));
+    }
     /**
      * flatMap：被观察者-->变换操作符ObservableSource</String>  再次发送--->观察者
      * 在这要分清楚map和flatMap  的区别
@@ -113,13 +84,7 @@ public class TransformOperatorActivity extends AppCompatActivity {
      */
     public void onFlatMapClickListener(View view) {
             Observable.just(1,2,3,4)
-                    .flatMap((Function<Integer, ObservableSource<String>>) integer -> Observable.create((ObservableOnSubscribe<String>) emitter -> emitter.onNext(String.valueOf(integer)))).subscribe(new Consumer<String>() {
-                @Override
-                public void accept(String s){
-                        LogUtil.e("accept:s>>>>>"+s);
-
-                }
-            });
+                    .flatMap((Function<Integer, ObservableSource<String>>) integer -> Observable.create((ObservableOnSubscribe<String>) emitter -> emitter.onNext(String.valueOf(integer)))).subscribe(s -> LogUtil.e("accept:s>>>>>"+s));
     }
     /**
      * concatMap:相比flatMap ,concatMap是排序的
@@ -133,11 +98,6 @@ public class TransformOperatorActivity extends AppCompatActivity {
                     }
                     return Observable.fromIterable(list).delay(5,TimeUnit.SECONDS);
                 })
-                .subscribe(new Consumer<String>() {
-                    @Override
-                    public void accept(String s){
-                        LogUtil.e("accept:s>>>>>"+s);
-                    }
-                });
+                .subscribe(s -> LogUtil.e("accept:s>>>>>"+s));
     }
 }
