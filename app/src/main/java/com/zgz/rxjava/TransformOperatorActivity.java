@@ -14,7 +14,6 @@ import io.reactivex.rxjava3.core.ObservableOnSubscribe;
 import io.reactivex.rxjava3.core.ObservableSource;
 import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.functions.Function;
 /**
  * @Description: 变换操作符
@@ -138,5 +137,17 @@ public class TransformOperatorActivity extends AppCompatActivity {
 
                     }
                 });
+    }
+
+    /**
+     * cast:将响应源发出的每个项转换为指定类型，并发出这些项
+     * 比如发送的数据有String,int,double float那么我只想发送int类型,感觉这个应该放在过滤型操作符
+     * 现在放在转换操作符中,有点想不通
+     */
+    public void onCastClickListener(View view) {
+        Observable<Number> numbers = Observable.just(1, 4.0, 3f, 7, 12, 4.6, 5);
+        numbers.filter((Number x) -> Integer.class.isInstance(x))
+                .cast(Integer.class)
+                .subscribe(integer -> LogUtil.e("integer:="+integer));
     }
 }

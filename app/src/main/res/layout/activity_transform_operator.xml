@@ -66,6 +66,14 @@
             android:layout_marginTop="10dp"
             android:onClick="onBufferClickListener"
             />
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="cast操作符"
+            android:gravity="center"
+            android:background="@color/colorAccent"
+            android:layout_marginTop="10dp"
+            android:onClick="onCastClickListener"
+            />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
