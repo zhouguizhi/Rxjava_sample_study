@@ -51,4 +51,36 @@ throttleLatest
 throttleWithTimeout
 timeout
 
+变换操作符
+buffer
+cast
+concatMap
+concatMapCompletable
+concatMapCompletableDelayError
+concatMapDelayError
+concatMapEager
+concatMapEagerDelayError
+concatMapIterable
+concatMapMaybe
+concatMapMaybeDelayError
+concatMapSingle
+concatMapSingleDelayError
+flatMap
+flatMapCompletable
+flatMapIterable
+flatMapMaybe
+flatMapObservable
+flatMapPublisher
+flatMapSingle
+flatMapSingleElement
+flattenAsFlowable
+flattenAsObservable
+groupBy
+map
+scan
+switchMap
+window
+
+
+
 
