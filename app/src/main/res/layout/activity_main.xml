@@ -9,7 +9,8 @@
     >
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -27,6 +28,13 @@
                 android:text="过滤型操作符"
                 android:gravity="center"
                 android:onClick="filterOperator"
+                />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:text="变换型操作符"
+                android:gravity="center"
+                android:onClick="transformOperator"
                 />
         </LinearLayout>
     </ScrollView>
