@@ -64,7 +64,7 @@ public class MergeActivity extends AppCompatActivity {
     }
 
     /**
-     * zip:多个
+     * zip:多个观察者合并后发送,合并的数量要保持一致
      */
     public void onZipClickListener(View view) {
         StringBuffer sb = new StringBuffer();

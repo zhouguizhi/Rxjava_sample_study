@@ -21,6 +21,7 @@
         <activity android:name=".TransformOperatorActivity"/>
         <activity android:name=".ConditionActivity"/>
         <activity android:name=".MergeActivity"/>
+        <activity android:name=".ThreadActivity"/>
     </application>
 
 </manifest>

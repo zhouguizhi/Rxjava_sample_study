@@ -48,7 +48,14 @@
                 android:layout_height="45dp"
                 android:text="合并型操作符"
                 android:gravity="center"
-                android:onClick="MergeOperator"
+                android:onClick="mergeOperator"
+                />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:text="线程操作符"
+                android:gravity="center"
+                android:onClick="threadOperator"
                 />
         </LinearLayout>
     </ScrollView>

@@ -26,7 +26,14 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this,ConditionActivity.class));
     }
 
-    public void MergeOperator(View view) {
+    public void mergeOperator(View view) {
         startActivity(new Intent(this,MergeActivity.class));
+    }
+    /**
+     * 线程切换
+     * @param view
+     */
+    public void threadOperator(View view) {
+        startActivity(new Intent(this,ThreadActivity.class));
     }
 }
