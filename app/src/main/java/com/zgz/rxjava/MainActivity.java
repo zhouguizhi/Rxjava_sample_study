@@ -22,4 +22,11 @@ public class MainActivity extends AppCompatActivity {
     public void transformOperator(View view) {
         startActivity(new Intent(this,TransformOperatorActivity.class));
     }
+    public void conditionOperator(View view) {
+        startActivity(new Intent(this,ConditionActivity.class));
+    }
+
+    public void MergeOperator(View view) {
+        startActivity(new Intent(this,MergeActivity.class));
+    }
 }

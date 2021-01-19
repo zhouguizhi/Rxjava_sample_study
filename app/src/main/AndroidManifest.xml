@@ -19,6 +19,8 @@
         <activity android:name="com.zgz.rxjava.CreateOperatorActivity"/>
         <activity android:name="com.zgz.rxjava.FilterOperatorActivity"/>
         <activity android:name=".TransformOperatorActivity"/>
+        <activity android:name=".ConditionActivity"/>
+        <activity android:name=".MergeActivity"/>
     </application>
 
 </manifest>
