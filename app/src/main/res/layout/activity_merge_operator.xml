@@ -28,11 +28,20 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:text="zip操作符"
+            android:text="concatWith操作符"
             android:gravity="center"
             android:background="@color/colorAccent"
             android:layout_marginTop="10dp"
-            android:onClick="onZipClickListener"
+            android:onClick="onConcatWithClickListener"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="concat操作符"
+            android:gravity="center"
+            android:background="@color/colorAccent"
+            android:layout_marginTop="10dp"
+            android:onClick="onConcatClickListener"
             />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

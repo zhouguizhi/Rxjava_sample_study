@@ -4,15 +4,8 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.zgz.rxjava.util.LogUtil;
-
-import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.core.ObservableEmitter;
-import io.reactivex.rxjava3.core.ObservableOnSubscribe;
-import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.core.SingleSource;
-import io.reactivex.rxjava3.functions.Consumer;
-
 /**
  * @Description: 合并操作符
  * @Author: zhouguizhi
@@ -45,13 +38,26 @@ public class MergeActivity extends AppCompatActivity {
 
     /**
      * concatWith:是合并后把concatWith创建的Observable的被观察者后执行
+     * 和startWith是相反的,
      */
-    public void onZipClickListener(View view) {
+    public void onConcatWithClickListener(View view) {
         Observable<String> firstNames = Observable.just("1", "2", "3");
         firstNames.concatWith(Observable.create(emitter -> {
             emitter.onNext("4");
             emitter.onNext("5");
             emitter.onNext("6");
         })).subscribe(s -> LogUtil.e("accept:>>>>>>"+s));
+    }
+    /**
+     * concat:顺序执行被观察者
+     */
+    public void onConcatClickListener(View view) {
+        Observable.concat(Observable.just("1"),
+                Observable.just("2"),
+                Observable.just("3"),
+                Observable.create(emitter -> {
+                    emitter.onNext("4");
+                    emitter.onComplete();
+                })).subscribe(s -> LogUtil.e("accept:>>>>>>"+s));
     }
 }
