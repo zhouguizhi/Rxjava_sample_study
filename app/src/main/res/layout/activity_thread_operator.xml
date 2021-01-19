@@ -27,5 +27,29 @@
             android:layout_marginTop="10dp"
             android:onClick="onTestThreadClickListener"
             />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="传统方式下载图片并显示"
+            android:gravity="center"
+            android:background="@color/colorAccent"
+            android:layout_marginTop="10dp"
+            android:onClick="onDownLoadImgClickListener"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="使用rxjava方式下载图片并显示"
+            android:gravity="center"
+            android:background="@color/colorAccent"
+            android:layout_marginTop="10dp"
+            android:onClick="onDownLoadImgUserRxjava"
+            />
+        <ImageView
+            android:id="@+id/iv_img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

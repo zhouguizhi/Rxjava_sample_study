@@ -1,14 +1,24 @@
 package com.zgz.rxjava;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.zgz.rxjava.util.LogUtil;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.ObservableOnSubscribe;
+import io.reactivex.rxjava3.core.Observer;
+import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 /**
  * @Description: 线程切换
@@ -18,11 +28,14 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
  */
 public class ThreadActivity extends AppCompatActivity {
     private TextView tvMsg;
+    private ImageView ivImg;
+    private static final String PATH = "https://dss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1785605861,1850750886&fm=26&gp=0.jpg";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thread_operator);
         tvMsg = findViewById(R.id.tv_msg);
+        ivImg = findViewById(R.id.iv_img);
     }
     /**
      * subscribeOn 这是让被观察者线程处于子线程,不管这个方法调用多少次,就执行一次,其他调用的都会被忽略
@@ -55,5 +68,81 @@ public class ThreadActivity extends AppCompatActivity {
         }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(integer -> LogUtil.e("下游接受:"+integer));
+    }
+    /**
+     * 传统方式下载图片并显示
+     * @param view
+     */
+    public void onDownLoadImgClickListener(View view) {
+        new Thread(){
+            @Override
+            public void run() {
+                try {
+                    URL url = new URL(PATH);
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setConnectTimeout(5000);
+                    if(connection.getResponseCode()== HttpURLConnection.HTTP_OK){
+                        Bitmap bitmap =  BitmapFactory.decodeStream(connection.getInputStream());
+                        if(null!=bitmap){
+                            ThreadActivity.this.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    ivImg.setImageBitmap(bitmap);
+                                }
+                            });
+                        }
+                    }
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+
+    }
+    public Bitmap downLoadImg(String path){
+        try {
+            URL url = new URL(PATH);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setConnectTimeout(5000);
+            if(connection.getResponseCode()== HttpURLConnection.HTTP_OK){
+                Bitmap bitmap =  BitmapFactory.decodeStream(connection.getInputStream());
+                return bitmap;
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public void onDownLoadImgUserRxjava(View view) {
+        Observable.just(PATH)
+                .map(s -> {
+                    LogUtil.e("apply...");
+                    return downLoadImg(s);
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Bitmap>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+                LogUtil.e("onSubscribe...");
+            }
+            @Override
+            public void onNext(@NonNull Bitmap bitmap) {
+                LogUtil.e("onNext...");
+                ivImg.setImageBitmap(bitmap);
+            }
+            @Override
+            public void onError(@NonNull Throwable e) {
+                LogUtil.e("onError...");
+            }
+            @Override
+            public void onComplete() {
+                LogUtil.e("onComplete...");
+            }
+        });
     }
 }
