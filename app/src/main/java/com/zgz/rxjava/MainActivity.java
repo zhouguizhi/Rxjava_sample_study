@@ -36,4 +36,8 @@ public class MainActivity extends AppCompatActivity {
     public void threadOperator(View view) {
         startActivity(new Intent(this,ThreadActivity.class));
     }
+
+    public void flowableOperator(View view) {
+        startActivity(new Intent(this,FlowableActivity.class));
+    }
 }

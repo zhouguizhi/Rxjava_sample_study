@@ -22,6 +22,7 @@
         <activity android:name=".ConditionActivity"/>
         <activity android:name=".MergeActivity"/>
         <activity android:name=".ThreadActivity"/>
+        <activity android:name=".FlowableActivity"/>
     </application>
 
 </manifest>

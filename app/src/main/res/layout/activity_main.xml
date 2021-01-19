@@ -57,6 +57,13 @@
                 android:gravity="center"
                 android:onClick="threadOperator"
                 />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:text="背压模式"
+                android:gravity="center"
+                android:onClick="flowableOperator"
+                />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
