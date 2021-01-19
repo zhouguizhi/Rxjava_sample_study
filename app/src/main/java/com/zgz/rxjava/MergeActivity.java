@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.zgz.rxjava.util.LogUtil;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.SingleSource;
+import io.reactivex.rxjava3.functions.BiFunction;
+import io.reactivex.rxjava3.functions.Consumer;
 /**
  * @Description: 合并操作符
  * @Author: zhouguizhi
@@ -49,7 +51,7 @@ public class MergeActivity extends AppCompatActivity {
         })).subscribe(s -> LogUtil.e("accept:>>>>>>"+s));
     }
     /**
-     * concat:顺序执行被观察者
+     * concat:顺序执行被观察者 把多个被观察者合并后一个最后发送
      */
     public void onConcatClickListener(View view) {
         Observable.concat(Observable.just("1"),
@@ -59,5 +61,18 @@ public class MergeActivity extends AppCompatActivity {
                     emitter.onNext("4");
                     emitter.onComplete();
                 })).subscribe(s -> LogUtil.e("accept:>>>>>>"+s));
+    }
+
+    /**
+     * zip:多个
+     */
+    public void onZipClickListener(View view) {
+        StringBuffer sb = new StringBuffer();
+        Observable observable1 =  Observable.just("姓名","年龄");
+        Observable observable2 =  Observable.just("周桂枝","18");
+        Observable.zip(observable1, observable2, (BiFunction<String, String, String>) (s, s2) -> {
+            sb.append(s).append(s2);
+            return sb.toString();
+        }).subscribe((Consumer<String>) s -> LogUtil.e("accept:>>>>>>"+s));
     }
 }

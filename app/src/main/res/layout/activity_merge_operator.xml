@@ -43,5 +43,14 @@
             android:layout_marginTop="10dp"
             android:onClick="onConcatClickListener"
             />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="zip操作符"
+            android:gravity="center"
+            android:background="@color/colorAccent"
+            android:layout_marginTop="10dp"
+            android:onClick="onZipClickListener"
+            />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
